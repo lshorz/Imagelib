@@ -1,0 +1,22 @@
+{
+    "name": "lshorz/imagelib",
+    "description": "PHP image handling",
+    "keywords": ["image", "gif", "thumb", "wartermark", "resize", "crop"],
+    "authors": [
+        {
+            "name": "Marven Liao",
+            "email": "lshzhuhai@163.com"
+        }
+    ],
+    "license":"MIT",
+    "require": {
+        "php" : ">=5.6",
+        "ext-gd": "*",
+        "intervention/image": "^2.3"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Lshorz\\Imagelib\\" : "src/"
+        }
+    }
+}
