@@ -25,8 +25,12 @@ echo $img->thumb(null, 200)->response('gif');
 ```
 该类库会自动识别图像是否为动态图片
 
-更多方法可参见抽像类里面的public方法 
+更多方法可参见抽像类里面的public方法，或参看相关类里面的方法 
 ## AbstractImage.php
+- ImageCommon.php 对应的是普通图像处理方法
+- GifCommon.php 对应的是动态GIF图像处理方法
+> ImageCommon.php(普通图像处理方法)会比GifCommon.php(gif处理方法)多出:
+> blur() //图像模糊 和 opacity() //透明度
 
 或各种方法的链式操作
 
