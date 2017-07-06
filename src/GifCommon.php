@@ -76,11 +76,7 @@ class GifCommon extends AbstractImage
                 break;
             //5缩略图固定缩放占满
             case self::THUMB_FORCE_RESIZE :
-                $this->gif = array_map(function ($image) use ($width, $height) {
-                    return $image->resize($width, $height, function ($constraint) {
-                        $constraint->upsize();
-                    });
-                }, $this->gif);
+                $this->gif = $this->forceResize($width, $height, $background);
                 break;
             default:
                 $this->gif = [];

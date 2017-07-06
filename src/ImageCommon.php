@@ -68,9 +68,7 @@ class ImageCommon extends AbstractImage
                 break;
             //5缩略图固定缩放占满
             case self::THUMB_FORCE_RESIZE :
-                $this->image = $this->image->resize($width, $height, function ($constraint) {
-                    $constraint->upsize();
-                });
+                $this->image = $this->forceResize($width, $height, $background);
                 break;
             default:
                 $this->image = null;
