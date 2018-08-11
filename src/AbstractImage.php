@@ -235,6 +235,26 @@ abstract class AbstractImage
     }
 
     /**
+     * 获取图像完整路径
+     *
+     * @return string
+     */
+    public function basePath()
+    {
+        return $this->image->basePath();
+    }
+
+    /**
+     * 获取图像所在路径
+     *
+     * @return string
+     */
+    public function dirName()
+    {
+        return $this->image->dirname;
+    }
+
+    /**
      * 获取图像名
      *
      * @return string
@@ -242,26 +262,6 @@ abstract class AbstractImage
     public function fileName()
     {
         return $this->image->filename;
-    }
-
-    /**
-    * 获取图像所在路径
-    *
-    * @return string
-    */
-    public function dirName()
-    {
-        return $this->image->dirname;
-    }
-
-    /**
-     * 获取图像完整路径
-     *
-     * @return string
-     */
-    public function filePath()
-    {
-        return $this->image->basePath();
     }
 
     /**

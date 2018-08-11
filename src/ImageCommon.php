@@ -193,14 +193,13 @@ class ImageCommon extends AbstractImage
      * @param string $path
      * @param int    $quality 图像质量
      *
-     * @return mixed
+     * @return void
      */
     public function save($path, $quality = 90)
     {
         // TODO: Implement save() method.
         $result = $this->image->save($path, $quality);
         $this->image->destroy();
-        return $result;
     }
 
     /**
