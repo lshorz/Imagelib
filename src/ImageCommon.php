@@ -7,10 +7,12 @@ class ImageCommon extends AbstractImage
     /**
      * 生成image图像对象
      *
+     * @param mixed
      * @return $this
      */
     public function open($file = null)
     {
+        // TODO: Implement open() method.
         $this->image = $this->imageManager->make($file);
 
         /**
@@ -23,7 +25,6 @@ class ImageCommon extends AbstractImage
          * =================================
          */
         $this->image->orientate();
-
         return $this;
     }
 
@@ -41,8 +42,8 @@ class ImageCommon extends AbstractImage
      */
     public function thumb($width = null, $height = null, $background = null, $type = self::THUMB_AUTO, $position = null)
     {
+        // TODO: Implement thumb() method.
         $position = $this->getPosition($position);
-
         switch ($type) {
             //1自动计算等比例缩放
             case self::THUMB_AUTO :
@@ -74,7 +75,6 @@ class ImageCommon extends AbstractImage
                 $this->image = null;
                 break;
         }
-
         return $this;
     }
 
@@ -89,9 +89,8 @@ class ImageCommon extends AbstractImage
      */
     public function waterMark($waterImg, $position = self::POS_BOTTOM_LEFT, $alpha = 0)
     {
-
+        // TODO: Implement waterMark() method.
         $position = $this->getPosition($position);
-
         $waterImg = $this->imageManager->make($waterImg);
 
         if ($alpha > 0) {
@@ -118,12 +117,11 @@ class ImageCommon extends AbstractImage
      */
     public function text($text, $size = 24, $color = '#000000', $position = self::POS_TOP_LEFT, $angle = 0, $fontType = null)
     {
+        // TODO: Implement text() method.
         $position = $this->getPosition($position);
         $info = $this->getInfo();
 
-
         $fontType = $fontType ? $fontType : __DIR__ . '/../assets/fonts/arialbi.ttf';
-
         //创建字体
         $fontclassname = sprintf('\Intervention\Image\%s\Font',
             $this->image->getDriver()->getDriverName());
@@ -186,7 +184,6 @@ class ImageCommon extends AbstractImage
             $font->valign('top');
             $font->angle($angle);
         });
-
         return $this;
     }
 
@@ -200,44 +197,10 @@ class ImageCommon extends AbstractImage
      */
     public function save($path, $quality = 90)
     {
-        $this->image->save($path, $quality);
+        // TODO: Implement save() method.
+        $result = $this->image->save($path, $quality);
         $this->image->destroy();
-        return 1;
-    }
-
-    /**
-     * 返回当前图像对象(可以继续操作)
-     *
-     * @return \Intervention\Image\Image
-     */
-    public function getObject()
-    {
-        return $this->image;
-    }
-
-    /**
-     * 获取当前图像源
-     *
-     * @return resource
-     */
-    public function getResource()
-    {
-        return $this->image->getCore();
-    }
-
-    /**
-     * 以特定图像格式生成相关编码
-     *
-     * @param string $format  图像格式[jpg|png|gif|tip|bmp|data-url]
-     * @param int    $quality 图像质量
-     *
-     * @return mixed
-     */
-    public function encode($format = 'jpg', $quality = 90)
-    {
-        $encode = $this->image->encode($format, $quality);
-        $this->image->destroy();
-        return $encode;
+        return $result;
     }
 
     /**
@@ -250,9 +213,26 @@ class ImageCommon extends AbstractImage
      */
     public function response($format = 'jpg', $quality = 90)
     {
+        // TODO: Implement response() method.
         $response = $this->image->response($format, $quality);
         $this->image->destroy();
         return $response;
+    }
+
+    /**
+     * 以特定图像格式生成相关编码
+     *
+     * @param string $format  图像格式[jpg|png|gif|tip|bmp|data-url]
+     * @param int    $quality 图像质量
+     *
+     * @return mixed
+     */
+    public function encode($format = 'jpg', $quality = 90)
+    {
+        // TODO: Implement encode() method.
+        $encode = $this->image->encode($format, $quality);
+        $this->image->destroy();
+        return $encode;
     }
 
     /**
@@ -266,6 +246,7 @@ class ImageCommon extends AbstractImage
      */
     public function resize($width = null, $height = null, $ratio = false)
     {
+        // TODO: Implement resize() method.
         $width = round($width);
         $height = round($height);
 
@@ -291,6 +272,7 @@ class ImageCommon extends AbstractImage
      */
     public function crop($width, $height, $x, $y)
     {
+        // TODO: Implement crop() method.
         $width = round($width);
         $height = round($height);
         $x = round($x);
@@ -312,22 +294,22 @@ class ImageCommon extends AbstractImage
      */
     public function rotate($angle, $background = null)
     {
+        // TODO: Implement rotate() method.
         $this->image->rotate($angle, $background);
-
         return $this;
     }
 
     /**
      * 翻转图像
      *
-     * @param int $model
+     * @param string $model
      *
      * @return $this
      */
     public function flip($model = self::FLIP_H)
     {
+        // TODO: Implement flip() method.
         $this->image->flip($model);
-
         return $this;
     }
 
@@ -338,8 +320,8 @@ class ImageCommon extends AbstractImage
      */
     public function greyscale()
     {
+        // TODO: Implement greyscale() method.
         $this->image->greyscale();
-
         return $this;
     }
 
@@ -347,23 +329,26 @@ class ImageCommon extends AbstractImage
      * 将图像像素化
      *
      * @param int $size
+     *
+     * @return $this
      */
     public function pixelate($size)
     {
+        // TODO: Implement pixelate() method.
         $this->image->pixelate($size);
-
         return $this;
     }
 
     /**
      * 设置图像模糊度
      *
-     * @param int $amount (0-100)
+     * @param integer $amount (0-100)
+     *
+     * @return $this
      */
     public function blur($amount)
     {
         $this->image->blur($amount);
-
         return $this;
     }
 
@@ -371,29 +356,13 @@ class ImageCommon extends AbstractImage
      * 设置图像透明度
      *
      * @param int $transparency (0-100)
+     *
+     * @return $this
      */
     public function opacity($transparency)
     {
         $this->image->opacity($transparency);
-
         return $this;
-    }
-
-    /**
-     * 获取当前图像相关信息
-     *
-     * @return array
-     */
-    public function getInfo()
-    {
-        $this->info = [
-            'width' => $this->image->width(),
-            'height' => $this->image->height(),
-            'mime' => $this->image->mime(),
-            'filesize' => $this->image->filesize(),
-        ];
-
-        return $this->info;
     }
 
     /**

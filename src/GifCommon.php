@@ -12,10 +12,12 @@ class GifCommon extends AbstractImage
      *
      * @param string $filePath
      *
+     * @throws
      * @return $this
      */
     public function open($filePath = null)
     {
+        // TODO: Implement open() method.
         $gif = new GifFrameExtractor();
         $gif->extract($filePath);
         $this->frames = $gif->getFrames();
@@ -43,8 +45,7 @@ class GifCommon extends AbstractImage
      */
     public function thumb($width = null, $height = null, $background = null, $type = self::THUMB_AUTO, $position = null)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement thumb() method.
         $position = $this->getPosition($position);
 
         switch ($type) {
@@ -96,10 +97,8 @@ class GifCommon extends AbstractImage
      */
     public function waterMark($waterImg, $position = self::POS_BOTTOM_LEFT, $alpha = 0)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement waterMark() method.
         $position = $this->getPosition($position);
-
         $waterImg = $this->imageManager->make($waterImg);
 
         if ($alpha > 0) {
@@ -111,7 +110,6 @@ class GifCommon extends AbstractImage
         }, $this->gif);
 
         $waterImg->destroy();
-
         return $this;
     }
 
@@ -130,8 +128,7 @@ class GifCommon extends AbstractImage
      */
     public function text($text, $size = 24, $color = '#000000', $position = self::POS_TOP_LEFT, $angle = 0, $fontType = null)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement text() method.
         $position = $this->getPosition($position);
         $info = $this->getInfo();
 
@@ -202,7 +199,6 @@ class GifCommon extends AbstractImage
                 $font->angle($angle);
             });
         }
-
         return $this;
     }
 
@@ -216,11 +212,9 @@ class GifCommon extends AbstractImage
      */
     public function save($path, $quality = null)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement save() method.
         $gifBinary = $this->makeGif();
         $saved = @file_put_contents($path, $gifBinary);
-
         unset($this->gif);
         return $saved;
     }
@@ -232,8 +226,7 @@ class GifCommon extends AbstractImage
      */
     public function response($format = 'gif', $quality = 90)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement response() method.
         $format = strtolower($format);
         $gifBinary = $this->makeGif();
 
@@ -268,8 +261,7 @@ class GifCommon extends AbstractImage
      */
     public function encode($format = 'gif', $quality = 90)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement encode() method.
         $encode = null;
         $format = strtolower($format);
         $code = $this->makeGif();
@@ -291,29 +283,8 @@ class GifCommon extends AbstractImage
                 break;
 
         }
-
         unset($this->gif);
-
         return $encode;
-    }
-
-    /**
-     * 获取图像信息
-     *
-     * @return array
-     */
-    public function getInfo()
-    {
-        // TODO: Implement resize() method.
-        $this->info = [
-            'width' => $this->image->width(),
-            'height' => $this->image->height(),
-            'mime' => $this->image->mime(),
-            'filesize' => $this->image->filesize(),
-        ];
-
-        $this->image->destroy();
-        return $this->info;
     }
 
     /**
@@ -328,7 +299,6 @@ class GifCommon extends AbstractImage
     public function resize($width = null, $height = null, $ratio = false)
     {
         // TODO: Implement resize() method.
-
         foreach ($this->gif as $key => $image) {
             $this->gif[$key] = $image->resize($width, $height, function ($constraint) use ($ratio) {
                 if ($ratio) {
@@ -337,7 +307,6 @@ class GifCommon extends AbstractImage
                 $constraint->upsize();
             });
         }
-
         return $this;
     }
 
@@ -353,8 +322,7 @@ class GifCommon extends AbstractImage
      */
     public function crop($width, $height, $x, $y)
     {
-        // TODO: Implement resize() method.
-
+        // TODO: Implement crop() method.
         $width = round($width);
         $height = round($height);
         $x = round($x);
@@ -362,7 +330,6 @@ class GifCommon extends AbstractImage
         $this->gif = array_map(function($image) use ($width, $height, $x, $y){
             return $image->crop($width, $height, $x, $y);
         }, $this->gif);
-
         return $this;
     }
 
@@ -377,17 +344,17 @@ class GifCommon extends AbstractImage
      */
     public function rotate($angle, $background = null)
     {
+        // TODO: Implement crop() method.
         $this->gif = array_map(function($image) use ($angle, $background){
             return $image->rotate($angle, $background);
         }, $this->gif);
-
         return $this;
     }
 
     /**
      * 翻转图像
      *
-     * @param int $model
+     * @param string $model
      *
      * @return $this
      */
@@ -412,7 +379,6 @@ class GifCommon extends AbstractImage
         $this->gif = array_map(function($image){
             return $image->greyscale();
         }, $this->gif);
-
         return $this;
     }
 

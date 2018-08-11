@@ -31,7 +31,13 @@ abstract class AbstractImage
     const POS_BOTTOM_RIGHT = 9;
 
     /* 翻转相关常量定义 */
+    /**
+     * @var string
+     */
     const FLIP_H = 'h'; //X轴翻转(水平)
+    /**
+     * @var string
+     */
     const FLIP_V = 'v'; //Y轴翻转(垂直)
 
     /**
@@ -68,6 +74,7 @@ abstract class AbstractImage
     /**
      * 准备要处理的图像
      *
+     * @param mixed
      * @return $this
      */
     abstract public function open($file);
@@ -111,14 +118,6 @@ abstract class AbstractImage
      * @return $this
      */
     abstract public function text($text, $size, $color, $position, $angle, $fontType);
-
-
-    /**
-     * 获取图像信息
-     *
-     * @return array
-     */
-    abstract public function getInfo();
 
     /**
     * 保存图像
@@ -204,6 +203,146 @@ abstract class AbstractImage
      */
     abstract public function pixelate($size);
 
+    /**
+     * 获取当前图像相关信息
+     *
+     * @return array
+     */
+    public function getInfo()
+    {
+        $this->info = [
+            'width' => $this->image->width(),
+            'height' => $this->image->height(),
+            'filesize' => $this->image->filesize(),
+            'mime' => $this->image->mime,
+            'extension' => $this->image->extension,
+            'basename' => $this->image->basename,
+            'filename' => $this->image->filename,
+            'dirname' => $this->image->dirname,
+            'path' => $this->image->basePath(),
+        ];
+        return $this->info;
+    }
+
+    /**
+     * 获取图像名及后缀
+     *
+     * @return string
+     */
+    public function baseName()
+    {
+        return $this->image->basename;
+    }
+
+    /**
+     * 获取图像名
+     *
+     * @return string
+     */
+    public function fileName()
+    {
+        return $this->image->filename;
+    }
+
+    /**
+    * 获取图像所在路径
+    *
+    * @return string
+    */
+    public function dirName()
+    {
+        return $this->image->dirname;
+    }
+
+    /**
+     * 获取图像完整路径
+     *
+     * @return string
+     */
+    public function filePath()
+    {
+        return $this->image->basePath();
+    }
+
+    /**
+     * 获取图像大小
+     *
+     * @return integer
+     */
+    public function fileSize()
+    {
+        return $this->image->filesize();
+    }
+
+    /**
+     * 获取图像扩展名
+     *
+     * @return string
+     */
+    public function extension()
+    {
+        return $this->image->extension;
+    }
+
+    /**
+     * 获取图像mime类型
+     *
+     * @return string
+     */
+    public function mime()
+    {
+        return $this->image->mime;
+    }
+
+    /**
+     * 获取图像宽度
+     *
+     * @return integer
+     */
+    public function width()
+    {
+        return $this->image->width();
+    }
+
+    /**
+     * 获取图像高度
+     *
+     * @return integer
+     */
+    public function height()
+    {
+        return $this->image->height();
+    }
+
+    /**
+     * 返回当前图像对象(可以继续操作)
+     *
+     * @return \Intervention\Image\Image
+     */
+    public function getObject()
+    {
+        return $this->image;
+    }
+
+    /**
+     * 获取当前图像源
+     *
+     * @return resource
+     */
+    public function getResource()
+    {
+        return $this->image->getCore();
+    }
+
+    /**
+     * 获取当前图像exif信息
+     *
+     * @return array
+     */
+    public function getExif()
+    {
+        return $this->image->exif();
+    }
 
     /**
      * 根据常量重新生成相关定位
